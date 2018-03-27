@@ -1,0 +1,18 @@
+@import './scss/Bar';
+@import './scss/Homepage';
+
+@font-face {
+  font-family: 'Arcadepix';
+  src: url('./ARCADEPI.TTF') format('ttf');
+}
+
+$breakpoint: 1000px;
+
+body {
+ font-family: 'Arcadepix', sans-serif;
+ text-align: left;
+ height: 100%;
+ width: 100%;
+ margin: 0;
+ padding: 0; 
+}
