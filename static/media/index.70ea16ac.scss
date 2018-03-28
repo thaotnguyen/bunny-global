@@ -1,15 +1,13 @@
 @import './scss/Bar';
 @import './scss/Homepage';
+@import './scss/codepen';
 
-@font-face {
-  font-family: 'Arcadepix';
-  src: url('./ARCADEPI.TTF') format('ttf');
-}
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans');
 
 $breakpoint: 1000px;
 
 body {
- font-family: 'Arcadepix', sans-serif;
+ font-family: 'Open Sans', sans-serif;
  text-align: left;
  height: 100%;
  width: 100%;
