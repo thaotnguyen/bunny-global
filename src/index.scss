@@ -1,0 +1,16 @@
+@import './scss/Bar';
+@import './scss/Homepage';
+@import './scss/codepen';
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans');
+
+$breakpoint: 1000px;
+
+body {
+ font-family: 'Open Sans', sans-serif;
+ text-align: left;
+ height: 100%;
+ width: 100%;
+ margin: 0;
+ padding: 0; 
+}
