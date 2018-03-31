@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 import Panel from './Panel';
 
@@ -31,7 +32,7 @@ export default class VoteContainer extends React.Component {
   }
 
   handleSubmit = () => {
-    if ($.cookie('bgvote') === 'success') {
+    if (Cookies.get('bgvote') === 'success') {
       return;
     }
     const selections = this.state.data.map((player) => {
@@ -43,7 +44,7 @@ export default class VoteContainer extends React.Component {
     })
     axios.put(url, { players: selections })
     .then(() => {
-      $.cookie('bgvote', 'success');
+      Cookies.set('bgvote', 'success');
       this.setState({ status: 'success' })
     })
     .catch(() => this.setState({ status: 'error' }));
