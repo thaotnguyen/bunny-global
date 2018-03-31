@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import Homepage from './components/Homepage';
+import VoteContainer from './components/VoteContainer';
 import './App.css';
 import './index.css';
 
@@ -11,6 +12,7 @@ class App extends Component {
     return (
       <div className="App">
         <Homepage />
+        <VoteContainer />
       </div>
     );
   }
