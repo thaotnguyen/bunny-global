@@ -78,6 +78,7 @@ export default class VoteContainer extends React.Component {
         <div className='time-container'>
           <div className='deadline'>Round 1 ends on <b>April 2</b>. Top 2 are locked in and bottom 1 is eliminated.</div>
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
+          <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='clock'>
             <span className="time"><Days deadline="April 2, 2018"/> day, </span>
             <span className="time"><Hours deadline="April 2, 2018"/>:</span>
