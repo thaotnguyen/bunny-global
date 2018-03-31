@@ -46,7 +46,7 @@ export default class VoteContainer extends React.Component {
     .then(() => {
       Cookies.set('bgvote', 'success');
       this.setState({ status: 'success' });
-      location.reload();
+      window.location.reload();
     })
     .catch(() => this.setState({ status: 'error' }));
   }
