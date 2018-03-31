@@ -45,7 +45,8 @@ export default class VoteContainer extends React.Component {
     axios.put(url, { players: selections })
     .then(() => {
       Cookies.set('bgvote', 'success');
-      this.setState({ status: 'success' })
+      this.setState({ status: 'success' });
+      location.reload();
     })
     .catch(() => this.setState({ status: 'error' }));
   }
