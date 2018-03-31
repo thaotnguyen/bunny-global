@@ -6,7 +6,7 @@ import { Days, Hours, Minutes, Seconds } from 'react-countdowntimer';
 
 import Panel from './Panel';
 
-const url = 'https://api.myjson.com/bins/1431j3';
+const url = 'https://api.myjson.com/bins/102smn';
 
 export default class VoteContainer extends React.Component {
 
@@ -52,6 +52,18 @@ export default class VoteContainer extends React.Component {
     .catch(() => this.setState({ status: 'error' }));
   }
 
+  nameColor = (votes) => {
+    let voteCounts = Array.from(new Set(this.state.data.map(player => player.votes)))
+      .sort((a,b) => b.votes - a.votes);
+    if ([voteCounts[0], voteCounts[1]].includes(votes)) {
+      return 'tag green';
+    }  else if (voteCounts[voteCounts.length-1] === votes) {
+      return 'tag red';
+    } else {
+      return 'tag';
+    }
+  }
+
   componentDidMount() {
     axios.get(url)
     .then(res => this.setState({ data: res.data.players
@@ -64,15 +76,19 @@ export default class VoteContainer extends React.Component {
       <div className='container'>
         <h2>SUMMIT VOTING</h2>
         <div className='time-container'>
-          <div className='deadline'>Round 1 ends on April 2.</div>
-          <span className="time"><Days deadline="April 2, 2018"/> day, </span>
-          <span className="time"><Hours deadline="April 2, 2018"/>:</span>
-          <span className="time"><Minutes deadline="April 2, 2018"/>:</span>
-          <span className="time"><Seconds deadline="April 2, 2018"/> remaining</span>
+          <div className='deadline'>Round 1 ends on <b>April 2</b>. Top 2 are locked in and bottom 1 is eliminated.</div>
+          <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
+          <div className='clock'>
+            <span className="time"><Days deadline="April 2, 2018"/> day, </span>
+            <span className="time"><Hours deadline="April 2, 2018"/>:</span>
+            <span className="time"><Minutes deadline="April 2, 2018"/>:</span>
+            <span className="time"><Seconds deadline="April 2, 2018"/> remaining in Round 1.</span>
+          </div>
         </div>
         <div className='vote-container'>
           { this.state.data.map((player,id) => <Panel 
             {...player} 
+            tagColor={this.nameColor(player.votes)}
             handleSelect={this.handleSelect} 
             id={id}
             selected={this.state.selected.includes(player.name)}/>)}
