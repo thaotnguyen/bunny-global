@@ -2,6 +2,7 @@
   "name": "bunny-global",
   "version": "0.1.0",
   "private": true,
+  "homepage": "bunnyglobal.org",
   "dependencies": {
     "axios": "^0.18.0",
     "jquery": "^3.3.1",
@@ -19,6 +20,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/index.scss src/index.css",
-    "watch-css": "npm run build-css && node-sass-chokidar src/index.scss src/index.css --watch"
+    "watch-css": "npm run build-css && node-sass-chokidar src/index.scss src/index.css --watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }
