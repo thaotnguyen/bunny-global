@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
+import { Days, Hours, Minutes, Seconds } from 'react-countdowntimer';
 
 import Panel from './Panel';
 
@@ -44,7 +45,7 @@ export default class VoteContainer extends React.Component {
     })
     axios.put(url, { players: selections })
     .then(() => {
-      Cookies.set('bgvote', 'success');
+      Cookies.set('bgvote', 'success', { expires: new Date('April 2, 2018')});
       this.setState({ status: 'success' });
       window.location.reload();
     })
@@ -62,7 +63,13 @@ export default class VoteContainer extends React.Component {
     return (
       <div className='container'>
         <h2>SUMMIT VOTING</h2>
-        <p>You are allowed 3 votes. Rounds end at midnight.</p>
+        <div className='time-container'>
+          <div className='deadline'>Round 1 ends on April 2.</div>
+          <span className="time"><Days deadline="April 2, 2018"/> day, </span>
+          <span className="time"><Hours deadline="April 2, 2018"/>:</span>
+          <span className="time"><Minutes deadline="April 2, 2018"/>:</span>
+          <span className="time"><Seconds deadline="April 2, 2018"/> remaining</span>
+        </div>
         <div className='vote-container'>
           { this.state.data.map((player,id) => <Panel 
             {...player} 
@@ -70,7 +77,9 @@ export default class VoteContainer extends React.Component {
             id={id}
             selected={this.state.selected.includes(player.name)}/>)}
         </div>
-        <div className='submit' onClick={this.handleSubmit}>SUBMIT</div>
+        {Cookies.get('bgvote') === 'success' 
+          ? ''
+          : <div className='submit' onClick={this.handleSubmit}>SUBMIT</div>}
       </div>
     );
   }

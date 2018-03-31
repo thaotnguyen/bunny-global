@@ -25,6 +25,14 @@
     padding-top: 70px;
     font-size: 12px;
   }
+  .time-container {
+    margin-top: 70px;
+  }
+  .time {
+    div {
+      display: inline;
+    }
+  }
   .vote-container {
     margin: auto;
     display: flex;
