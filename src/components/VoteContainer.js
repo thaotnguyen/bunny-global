@@ -76,6 +76,7 @@ export default class VoteContainer extends React.Component {
       <div className='container'>
         <h2>SUMMIT VOTING</h2>
         <div className='time-container'>
+          <div>You are allowed 3 votes.</div>
           <div className='deadline'>Round 1 ends on <b>April 2</b>. Top 2 are locked in and bottom 1 is eliminated.</div>
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
