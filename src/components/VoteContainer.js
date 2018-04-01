@@ -6,7 +6,7 @@ import { Days, Hours, Minutes, Seconds } from 'react-countdowntimer';
 
 import Panel from './Panel';
 
-const url = 'https://api.myjson.com/bins/102smn';
+const url = 'https://api.myjson.com/bins/1btai7';
 
 export default class VoteContainer extends React.Component {
 
@@ -80,7 +80,7 @@ export default class VoteContainer extends React.Component {
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='clock'>
-            <span className="time"><Days deadline="April 2, 2018"/> day, </span>
+            <span className="time"><Days deadline="April 2, 2018"/> days, </span>
             <span className="time"><Hours deadline="April 2, 2018"/>:</span>
             <span className="time"><Minutes deadline="April 2, 2018"/>:</span>
             <span className="time"><Seconds deadline="April 2, 2018"/> remaining in Round 1.</span>

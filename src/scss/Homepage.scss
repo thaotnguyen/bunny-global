@@ -30,8 +30,10 @@ $border-distance: 25px;
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   position: relative;
+  perspective: 2000px;
   z-index: -10;
   .sticky {
+    transform-style: preserve-3d;
     position: fixed;
     height: 100%;
     width: 100%;
