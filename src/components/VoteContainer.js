@@ -117,7 +117,7 @@ export default class VoteContainer extends React.Component {
           <div>You are allowed 2 votes this round. Votes do not carry over between rounds.<p></p></div>
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
-          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are safe. You have one vote and sudden death ends at 1 AM.</div>
+          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are safe. You have one vote and sudden death ends at 1 AM. Their votes in sudden death will not carry over to the next round.</div>
           <div className='clock'>
             <span className='time'></span>
           </div>
