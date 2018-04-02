@@ -56,7 +56,6 @@ $border-distance: 25px;
   }
   .event_title {
     font-size: 48px;
-    
     letter-spacing: 18px;
     font-weight: bold;
     background: -webkit-linear-gradient(white, #38495a);
@@ -91,6 +90,15 @@ $border-distance: 25px;
         top: -1 * $border-distance/2.5;
       }
     }
+  }
+  .date {
+    text-transform: uppercase;
+    font-size: 30px;
+    position: absolute;
+    top: calc(50% + 160px);
+    letter-spacing: 3px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .vote {
     position: absolute;

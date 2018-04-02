@@ -16,6 +16,7 @@ handleVoteClick = () => {
           <div id='stars3'></div>
           <div id='title'>BUNNY GLOBAL</div>
           <div className='event_title'>BOSS MONSTER SUMMIT</div>
+          <div className='date'>April 14</div>
           <div className='vote' onClick={this.handleVoteClick}>VOTE<div className='chevron'>〉</div></div>
         </div>
       </div>

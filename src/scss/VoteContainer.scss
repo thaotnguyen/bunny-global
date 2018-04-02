@@ -9,7 +9,6 @@
     font-family: 'Josefin Sans';
     text-transform: uppercase;
     position: relative;
-    display: inline-block;
     &:after {
       content: "";
       position: absolute;
@@ -26,6 +25,7 @@
   }
   .time-container {
     margin-top: 70px;
+    padding: 0 20px;
   }
   .time {
     div {
@@ -58,5 +58,19 @@
     margin-bottom: 30px;
     cursor: pointer;
     pointer-events: auto;
+  }
+}
+
+.confirmed, .eliminated, .safe {
+  h2 {
+    @media screen and (max-width: $breakpoint), screen and (max-device-width: $breakpoint) {
+      font-size: 28px;
+    }
+  }
+}
+
+.confirmed, .safe {
+  .panel {
+    pointer-events: none;
   }
 }
