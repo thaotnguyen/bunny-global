@@ -78,6 +78,20 @@ export default class VoteContainer extends React.Component {
   }
 
   render() {
+    let hours = 0;
+    let countDownDate = new Date("April 2, 2018").getTime();
+    let x = setInterval(function() {
+      let now = new Date().getTime();
+      let distance = countDownDate - now;
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementsByClassName("time")[0].innerHTML = 
+        `${days !== 0 ? days + 'd' : ''} ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds} remaining.`;
+    }, 1000);
     return (
       <div className='container'>
         <h2>SUMMIT VOTING</h2>
@@ -87,10 +101,7 @@ export default class VoteContainer extends React.Component {
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='clock'>
-            <span className="time"><Days deadline="April 2, 2018"/> days, </span>
-            <span className="time"><Hours deadline="April 2, 2018"/>:</span>
-            <span className="time"><Minutes deadline="April 2, 2018"/>:</span>
-            <span className="time"><Seconds deadline="April 2, 2018"/> remaining in Round 1.</span>
+            <span className={hours < 1 ? 'time red' : 'time'}></span>
           </div>
         </div>
         <div className='vote-container'>
