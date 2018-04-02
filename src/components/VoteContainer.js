@@ -59,7 +59,8 @@ export default class VoteContainer extends React.Component {
 
   nameColor = (votes) => {
     let voteCounts = Array.from(new Set(this.state.data.map(player => player.votes)))
-      .sort((a,b) => b.votes - a.votes);
+      .sort((a,b) => b - a);
+    console.log(this.state.data);  
     if ([voteCounts[0], voteCounts[1]].includes(votes)) {
       return 'tag green';
     }  else if (voteCounts[voteCounts.length-1] === votes) {
