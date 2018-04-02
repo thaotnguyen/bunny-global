@@ -36,20 +36,25 @@ export default class VoteContainer extends React.Component {
     if (Cookies.get('bgvote') === 'success') {
       return;
     }
-    const selections = this.state.data.map((player) => {
-      let playerClone = JSON.parse(JSON.stringify(player));
-      if (this.state.selected.includes(player.name)) {
-        playerClone.votes++;
-      }
-      return playerClone;
-    })
-    axios.put(url, { players: selections })
-    .then(() => {
-      Cookies.set('bgvote', 'success', { expires: new Date('April 2, 2018')});
-      this.setState({ status: 'success' });
-      window.location.reload();
-    })
-    .catch(() => this.setState({ status: 'error' }));
+    axios.get(url)
+    .then(res => {
+      const selections = res.data.players.map((player) => {
+        let playerClone = JSON.parse(JSON.stringify(player));
+        if (this.state.selected.includes(player.name)) {
+          playerClone.votes++;
+        }
+        return playerClone;
+      })
+      axios.put(url, { players: selections })
+        .then(() => {
+        Cookies.set('bgvote', 'success', { expires: new Date('April 2, 2018')});
+        this.setState({ status: 'success' });
+        window.location.reload();
+      })
+      .catch(() => this.setState({ status: 'error' }));
+    });
+    
+    
   }
 
   nameColor = (votes) => {
