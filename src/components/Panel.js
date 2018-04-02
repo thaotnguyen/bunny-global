@@ -10,9 +10,9 @@ export default class Panel extends React.Component {
     if (props.status === 'in') {
       return 'CONFIRMED';
     } else if (props.status === 'out') {
-      return `${props.votes} vote${props.votes === 1 ? '' : 's'}`;
+      return 'ELIMINATED';
     } else {
-      return `SAFE`;
+      return `${props.votes} vote${props.votes === 1 ? '' : 's'}`;
     }
   }
 
@@ -21,7 +21,11 @@ export default class Panel extends React.Component {
       <div 
         onClick={this.onSelect} 
         className={this.props.selected ? 'panel selected' : 'panel'}
-        style={{ background: `url('img/${this.props.name}.png')`, 'background-size': 'contain' }}>
+        style={{ 
+          background: `url('img/${this.props.name}.png')`, 
+          backgroundSize: 'contain', 
+          WebkitFilter: `grayscale(${this.props.status === 'out' ? '10' : '0'}0%)`,
+          filter: `grayscale(${this.props.status === 'out' ? '10' : '0'}0%)`}}>
         <div className={this.props.tagColor}>{this.props.tag}</div>
         <div className='name'>{this.props.name}</div>
         <div className='votes'>

@@ -4,10 +4,11 @@ import Cookies from 'js-cookie';
 
 import Panel from './Panel';
 
-const url = 'https://api.myjson.com/bins/11emun';
-const cookie = 'bgvote2';
+const url = 'https://api.myjson.com/bins/bc29r';
+const cookie = 'bgvote_r2';
 
 const countOccurrences = (arr, num) => {
+  console.log(arr.map(i => i === num));
   return arr.map(i => i === num).reduce((a,b) => a + b, 0);
 }
 
@@ -27,7 +28,7 @@ export default class VoteContainer extends React.Component {
       const selectedClone = this.state.selected.filter(i => i !== id);
       this.setState({ selected: selectedClone });
     } else {
-      if (this.state.selected.length === 1) {
+      if (this.state.selected.length === 2) {
         return;
       }
       const selectedClone = this.state.selected.concat([id]);
@@ -64,22 +65,24 @@ export default class VoteContainer extends React.Component {
     if (!votes) {
       return 'tag';
     }
-    let voteCounts = Array.from(new Set(this.state.data.filter((player) => player.status === 'out').map(player => player.votes)))
+    let filteredPlayers = this.state.data.filter((player) => player.status === 'pending');
+    let voteCounts = Array.from(new Set(filteredPlayers.map(player => player.votes)))
       .sort((a,b) => b - a);
     let winningCounts;
     let losingCounts;
-    if (countOccurrences(this.state.data.map(player => player.votes), voteCounts[0]) === 1) {
-      winningCounts = [voteCounts[0]];
-    } else {
+    if (countOccurrences(filteredPlayers.map(player => player.votes), voteCounts[0]) === 1) {
       winningCounts = [voteCounts[0], voteCounts[1]];
+    } else {
+      winningCounts = [voteCounts[0]];
     }
-    if (countOccurrences(this.state.data.map(player => player.votes), voteCounts[voteCounts.length-1]) === 1) {
-      losingCounts = [voteCounts[voteCounts.length-1]];
+    if (countOccurrences(filteredPlayers.map(player => player.votes), voteCounts[voteCounts.length-1]) === 1) {
+      losingCounts = [voteCounts[voteCounts.length-1], voteCounts[voteCounts.length-2]];
     } else {
       losingCounts = [voteCounts[voteCounts.length-1]];
     }
+    console.log(winningCounts, losingCounts);
     if (winningCounts.includes(votes)) {
-      return 'tag';
+      return 'tag green';
     } else if (losingCounts.includes(votes)) {
       return 'tag red';
     } else {
@@ -97,7 +100,7 @@ export default class VoteContainer extends React.Component {
   render() {
     let days = 0;
     let hours = 0;
-    let countDownDate = new Date("April 2, 2018, 1:00 AM").getTime();
+    let countDownDate = new Date("April 4, 2018").getTime();
     let x = setInterval(function() {
       let now = new Date().getTime();
       let distance = countDownDate - now;
@@ -117,15 +120,14 @@ export default class VoteContainer extends React.Component {
           <div>You are allowed 2 votes this round. Votes do not carry over between rounds.<p></p></div>
           <div className='deadline'>Round 2 ends on <b>April 4</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
-          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are safe. You have one vote and sudden death ends at 1 AM. Their votes in sudden death will not carry over to the next round.</div>
           <div className='clock'>
             <span className='time'></span>
           </div>
         </div>
-        <div className='eliminated'>  
-          <h2 style={{ color: 'red' }}>SUDDEN DEATH</h2>  
+        <div className='safe'>
           <div className='vote-container'>
-            { this.state.data.filter((player) => player.status === 'out').map((player,id) => <Panel 
+
+            { this.state.data.filter((player) => player.status === 'pending').map((player,id) => <Panel 
               {...player} 
               tagColor={this.nameColor(player.votes)}
               handleSelect={this.handleSelect} 
@@ -136,22 +138,22 @@ export default class VoteContainer extends React.Component {
           ? ''
           : <div className='submit' onClick={this.handleSubmit}>SUBMIT</div>}
         </div>
-        <h2>SAFE</h2>  
-        <div className='safe'>
-          <div className='vote-container'>
-
-            { this.state.data.filter((player) => player.status === 'pending').map((player,id) => <Panel 
-              {...player} 
-              tagColor={this.nameColor()}
-              handleSelect={this.handleSelect} 
-              id={id}
-              selected={this.state.selected.includes(player.name)}/>)}
-          </div>
-        </div>
         <div className='confirmed'>  
           <h2>CONFIRMED</h2>  
           <div className='vote-container'>
             { this.state.data.filter((player) => player.status === 'in').map((player,id) => <Panel 
+              {...player} 
+              tagColor={this.nameColor()}
+              handleSelect={this.handleSelect} 
+              id={id}
+              key={id}
+              selected={this.state.selected.includes(player.name)}/>)}
+          </div>
+        </div>
+        <div className='eliminated'>  
+          <h2>ELIMINATED</h2>  
+          <div className='vote-container'>
+            { this.state.data.filter((player) => player.status === 'out').map((player,id) => <Panel 
               {...player} 
               tagColor={this.nameColor()}
               handleSelect={this.handleSelect} 

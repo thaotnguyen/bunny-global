@@ -92,6 +92,7 @@ $border-distance: 25px;
     }
   }
   .date {
+    font-family: 'Josefin Sans';
     text-transform: uppercase;
     font-size: 30px;
     position: absolute;
@@ -99,6 +100,10 @@ $border-distance: 25px;
     letter-spacing: 3px;
     left: 50%;
     transform: translateX(-50%);
+    @media screen and (max-width: $breakpoint), screen and (max-device-width: $breakpoint) {
+      font-size: 16px;
+      top: calc(50% + 90px);
+    }
   }
   .vote {
     position: absolute;
