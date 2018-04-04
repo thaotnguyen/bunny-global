@@ -12,7 +12,7 @@ export default class Panel extends React.Component {
     } else if (props.status === 'out') {
       return 'ELIMINATED';
     } else if (props.status === 'pending') {
-      return 'SAFE';
+      return `${props.votes} vote${props.votes === 1 ? '' : 's'}`;
     } else {
       return `${props.votes} vote${props.votes === 1 ? '' : 's'}`;
     }

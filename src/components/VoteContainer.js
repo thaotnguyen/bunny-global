@@ -4,9 +4,9 @@ import Cookies from 'js-cookie';
 
 import Panel from './Panel';
 
-const url = 'https://api.myjson.com/bins/13jnaz';
-const cookie = 'bgvote_r3';
-const deadline = 'April 4, 2018, 1:00 AM';
+const url = 'https://api.myjson.com/bins/1cu823';
+const cookie = 'bgvote_r4';
+const deadline = 'April 6, 2018';
 
 const countOccurrences = (arr, num) => {
   return arr.map(i => i === num).reduce((a,b) => a + b, 0);
@@ -65,7 +65,7 @@ export default class VoteContainer extends React.Component {
     if (!votes) {
       return 'tag';
     }
-    let filteredPlayers = this.state.data.filter((player) => player.status === 'sd');
+    let filteredPlayers = this.state.data.filter((player) => player.status === 'pending');
     let voteCounts = Array.from(new Set(filteredPlayers.map(player => player.votes)))
       .sort((a,b) => b - a);
     let winningCounts;
@@ -80,11 +80,10 @@ export default class VoteContainer extends React.Component {
     } else {
       losingCounts = [voteCounts[voteCounts.length-1]];
     }
-    console.log(losingCounts);
     if (losingCounts.includes(votes)) {
       return 'tag red';
     } else if (winningCounts.includes(votes)) {
-      return 'tag';
+      return 'tag green';
     } else {
       return 'tag';
     }
@@ -124,15 +123,13 @@ export default class VoteContainer extends React.Component {
         <div className='time-container'>
           <div>You are allowed 1 vote this round. Votes do not carry over between rounds.<p></p></div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
-          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are eliminated. You have one vote and sudden death ends at 1 AM.</div>
           <div className='clock'>
             <span className='time'></span>
           </div>
         </div>
-        <div className='sd'>
-          <h2 style={{ color: 'red' }}>SUDDEN DEATH</h2>  
+        <div className='safe'>
           <div className='vote-container'>
-            { this.state.data.filter((player) => player.status === 'sd').map((player,id) => <Panel 
+            { this.state.data.filter((player) => player.status === 'pending').map((player,id) => <Panel 
               {...player} 
               tagColor={this.nameColor(player.votes)}
               handleSelect={this.handleSelect} 
@@ -142,17 +139,6 @@ export default class VoteContainer extends React.Component {
           {Cookies.get(cookie) === 'success' || (new Date() - new Date(deadline)) > 0
           ? ''
           : <div className='submit' onClick={this.handleSubmit}>SUBMIT</div>}
-        </div>
-        <div className='safe'>
-          <h2>SAFE</h2>  
-          <div className='vote-container'>
-            { this.state.data.filter((player) => player.status === 'pending').map((player,id) => <Panel 
-              {...player} 
-              tagColor={this.nameColor()}
-              handleSelect={this.handleSelect} 
-              id={id}
-              selected={this.state.selected.includes(player.name)}/>)}
-          </div>
         </div>
         <div className='confirmed'>  
           <h2>CONFIRMED</h2>  
