@@ -80,10 +80,11 @@ export default class VoteContainer extends React.Component {
     } else {
       losingCounts = [voteCounts[voteCounts.length-1]];
     }
-    if (winningCounts.includes(votes)) {
-      return 'tag';
-    } else if (losingCounts.includes(votes)) {
+    console.log(losingCounts);
+    if (losingCounts.includes(votes)) {
       return 'tag red';
+    } else if (winningCounts.includes(votes)) {
+      return 'tag';
     } else {
       return 'tag';
     }
@@ -123,7 +124,7 @@ export default class VoteContainer extends React.Component {
         <div className='time-container'>
           <div>You are allowed 1 vote this round. Votes do not carry over between rounds.<p></p></div>
           <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
-          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are safe. You have one vote and sudden death ends at 1 AM.</div>
+          <div className='deadline' style={{ color: 'red'}}><p></p>Sudden Death round: Due to these 3 players tying, this sudden death round will determine which 2 are eliminated. You have one vote and sudden death ends at 1 AM.</div>
           <div className='clock'>
             <span className='time'></span>
           </div>
