@@ -11,6 +11,8 @@ export default class Panel extends React.Component {
       return 'CONFIRMED';
     } else if (props.status === 'out') {
       return 'ELIMINATED';
+    } else if (props.status === 'pending') {
+      return 'SAFE';
     } else {
       return `${props.votes} vote${props.votes === 1 ? '' : 's'}`;
     }
