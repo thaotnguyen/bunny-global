@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 import Panel from './Panel';
 
-const url = 'https://api.myjson.com/bins/1cu823';
+const url = 'https://api.myjson.com/bins/up7kj';
 const cookie = 'bgvote_r4';
 const deadline = 'April 6, 2018';
 
@@ -121,24 +121,9 @@ export default class VoteContainer extends React.Component {
       <div className='container'>
         <h2>SUMMIT VOTING</h2>
         <div className='time-container'>
-          <div>You are allowed 1 vote this round. Votes do not carry over between rounds.<p></p></div>
-          <div className='deadline'>Round 3 ends on <b>April 6</b>. Top 2 are locked in and bottom 2 are eliminated.</div>
           <div className='clock'>
             <span className='time'></span>
           </div>
-        </div>
-        <div className='safe'>
-          <div className='vote-container'>
-            { this.state.data.filter((player) => player.status === 'pending').map((player,id) => <Panel 
-              {...player} 
-              tagColor={this.nameColor(player.votes)}
-              handleSelect={this.handleSelect} 
-              id={id}
-              selected={this.state.selected.includes(player.name)}/>)}
-          </div>
-          {Cookies.get(cookie) === 'success' || (new Date() - new Date(deadline)) > 0
-          ? ''
-          : <div className='submit' onClick={this.handleSubmit}>SUBMIT</div>}
         </div>
         <div className='confirmed'>  
           <h2>CONFIRMED</h2>  
