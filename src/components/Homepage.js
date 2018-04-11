@@ -13,6 +13,14 @@ export default class Homepage extends React.Component {
     document.getElementsByClassName('vote-container')[0].scrollIntoView({ behavior: 'smooth' });
   }
 
+  statusChangeCallback = (res) => {
+    if (res.status === 'connected') {
+      this.setState({ loggedIn: true });
+    } else {
+      this.setState({ loggedIn: false });
+    }
+  }
+
   updateLoggedInState = () => {
     this.setState({ loggedIn: true });
   }
@@ -30,6 +38,10 @@ export default class Homepage extends React.Component {
         xfbml            : true,
         version          : 'v2.12'
       });
+
+      FB.getLoginStatus(function(response) {
+        this.statusChangeCallback(response);
+      }.bind(this));
 
       window.FB.Event.subscribe('auth.statusChange', (res) => {
         if (res.authResponse) {
