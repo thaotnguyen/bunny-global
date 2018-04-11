@@ -33,6 +33,7 @@ export default class Homepage extends React.Component {
     window.fbAsyncInit = function() {
       window.FB.init({
         appId            : '1754098981316904',
+        status           : true,
         cookie           : true,
         autoLogAppEvents : true,
         xfbml            : true,
