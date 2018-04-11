@@ -39,7 +39,7 @@ export default class Homepage extends React.Component {
         version          : 'v2.12'
       });
 
-      FB.getLoginStatus(function(response) {
+      window.FB.getLoginStatus(function(response) {
         this.statusChangeCallback(response);
       }.bind(this));
 
