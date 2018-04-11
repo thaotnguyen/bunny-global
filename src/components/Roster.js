@@ -1,5 +1,3 @@
-/*global FB*/
-
 import React from 'react';
 
 export default class Roster extends React.Component {
@@ -21,9 +19,9 @@ export default class Roster extends React.Component {
         version          : 'v2.12'
       });
 
-      FB.getLoginStatus(function(res) {
+      window.FB.getLoginStatus(function(res) {
         console.log(res);
-        selfCopy.setState({ uid: res.authResponse.userID, name: response.username });
+        selfCopy.setState({ uid: res.authResponse.userID, name: res.username });
       }.bind(this));
     }.bind(this);
 
