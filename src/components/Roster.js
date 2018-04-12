@@ -15,9 +15,9 @@ export default class Roster extends React.Component {
       } else {
         let name = '';
         axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-          .then((res) => {
-            if (res.data.name) {
-              name = res.data.name;
+          .then((response) => {
+            if (response.data.name) {
+              name = response.data.name;
             }
           })
           .then(() => this.setState({ 
