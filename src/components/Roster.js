@@ -1,14 +1,31 @@
+import axios from 'axios';
 import React from 'react';
 
 export default class Roster extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { uid: '' };
+    this.state = { status: '', uid: '', accessToken: '', name: '' };
   }
 
   componentDidMount() {
-    window.FB.getLoginStatus(res => this.setState({ uid: res.authResponse.userID }));
+    window.FB.getLoginStatus(res => {
+      if (res.status !== 'connected') {
+        window.location.replace('/');
+      } else {
+        const self = this;
+        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`, (res) => {
+          if (res.name) {
+            self.setState({ name: res.name });
+          }
+        });
+        this.setState({ 
+          status: res.status,
+          uid: res.authResponse.userID, 
+          accessToken: res.authResponse.accessToken, 
+        });
+      }
+    });
   }
 
   render() {
