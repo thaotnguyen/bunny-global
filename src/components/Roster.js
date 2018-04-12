@@ -13,11 +13,12 @@ export default class Roster extends React.Component {
       if (res.status !== 'connected') {
         window.location.replace('/');
       } else {
-        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`, (res) => {
-          if (res.name) {
-            this.setState({ name: res.name });
-          }
-        });
+        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+          .then((res) => {
+            if (res.name) {
+              this.setState({ name: res.name });
+            }
+          });
         this.setState({ 
           status: res.status,
           uid: res.authResponse.userID, 
