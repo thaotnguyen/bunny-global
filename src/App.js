@@ -6,7 +6,6 @@ import Homepage from './components/Homepage';
 import Roster from './components/Roster';
 import Create from './components/Create';
 import Privacy from './components/Privacy';
-import './App.css';
 import './index.css';
 
 const App = withRouter(({ location }) => (
