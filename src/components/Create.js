@@ -140,7 +140,7 @@ export default class Create extends React.Component {
       window.location.replace('/');
     }
     axios.get(url)
-      .then(res => this.setState({ players: res.data.players.sort((a,b) => !(a.value - b.value)) }));
+      .then(res => this.setState({ players: res.data.players.sort((a,b) => (a.value - b.value)).reverse() }));
   }
 
   render() {    
