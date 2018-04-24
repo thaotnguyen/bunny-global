@@ -144,11 +144,11 @@ export default class Create extends React.Component {
       });
 
       window.FB.getLoginStatus(function(response) {
-        this.statusChangeCallback(response);
+        this.updateLoggedInState(response);
       }.bind(this));
 
       window.FB.Event.subscribe('auth.statusChange', (res) => {
-        this.statusChangeCallback(res);
+        this.updateLoggedInState(res);
       })
     }.bind(this);
 
