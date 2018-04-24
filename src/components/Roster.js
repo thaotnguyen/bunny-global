@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import "react-table/react-table.css";
 
-const url = 'https://api.myjson.com/bins/8jzvn';
+const url = 'https://api.myjson.com/bins/16kho3';
 
 const columns = [
   {
@@ -43,19 +43,7 @@ export default class Roster extends React.Component {
       window.location.replace('/');
     } else {
       console.log("!");
-      let name = '';
-      axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-        .then((response) => {
-          if (response.data.name) {
-            name = response.data.name;
-          }
-        })
-        .then(() => this.setState({ 
-          status: res.status,
-          uid: res.authResponse.userID, 
-          accessToken: res.authResponse.accessToken, 
-          name: name,
-        }));
+      
     }
   }
 
@@ -66,13 +54,29 @@ export default class Roster extends React.Component {
         status           : true,
         cookie           : true,
         autoLogAppEvents : true,
-        xfbml            : false,
+        xfbml            : true,
         version          : 'v2.12'
       });
 
-      window.FB.getLoginStatus(function(response) {
+      window.FB.getLoginStatus(function(res) {
         console.log("?");
-        this.updateLoggedInState(response);
+        console.log(res);
+        let name = '';
+        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+          .then((response) => {
+            console.log("!");
+            console.log(response);
+            if (response.data.name) {
+              name = response.data.name;
+            }
+          })
+          .then(() => this.setState({ 
+            status: res.status,
+            uid: res.authResponse.userID, 
+            accessToken: res.authResponse.accessToken, 
+            name: name,
+          }));
+        this.updateLoggedInState(res);
       }.bind(this));
 
       window.FB.Event.subscribe('auth.statusChange', (res) => {

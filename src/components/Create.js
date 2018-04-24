@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import $ from 'jquery';
 
-const url = 'https://api.myjson.com/bins/8jzvn';
+const url = 'https://api.myjson.com/bins/16kho3';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
@@ -193,7 +193,7 @@ export default class Create extends React.Component {
             <h1 className={this.state.money < 0 ? 'invalid' : ''}>{toFixed(this.state.money, 2)}</h1>
             <div className='money-left'>MONEY LEFT</div>
             <ReactTable 
-              data={this.state.players} 
+              data={this.state.players.sort((a,b) => !(a.value - b.value))} 
               columns={this.columns()} 
               showPagination={false}
               showPageSizeOptions={false}
