@@ -14,6 +14,7 @@ export default class Homepage extends React.Component {
   }
 
   componentDidMount() {
+    const this1 = this;
     window.fbAsyncInit = function() {
       window.FB.init({
         appId            : '1754098981316904',
@@ -24,15 +25,17 @@ export default class Homepage extends React.Component {
         version          : 'v2.12'
       });
 
+      const this2 = this1;
       window.FB.getLoginStatus(function(res) {
         console.log("?");
         console.log(res);
         let name = '';
+        const this3 = this2;
         axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
           .then((response) => {
             console.log("!");
             console.log(response);
-            const self = this;
+            const self = this3;
             if (response.data.name) {
               self.setState({ 
                 status: res.status,
