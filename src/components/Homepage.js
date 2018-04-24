@@ -49,7 +49,7 @@ export default class Homepage extends React.Component {
             }
           })
       });
-    }.bind(this);
+    }
 
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
