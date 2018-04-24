@@ -49,50 +49,26 @@ export default class Roster extends React.Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    window.fbAsyncInit = function() {
-      console.log('fbAsyncInit running');
-      window.FB.init({
-        appId            : '1754098981316904',
-        status           : true,
-        cookie           : true,
-        autoLogAppEvents : true,
-        xfbml            : true,
-        version          : 'v2.12'
-      });
-
-      window.FB.getLoginStatus(function(res) {
-        console.log("?");
-        console.log(res);
-        let name = '';
-        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-          .then((response) => {
-            console.log("!");
-            console.log(response);
-            if (response.data.name) {
-              name = response.data.name;
-            }
-          })
-          .then(() => this.setState({ 
-            status: res.status,
-            uid: res.authResponse.userID, 
-            accessToken: res.authResponse.accessToken, 
-            name: name,
-          }));
-        this.updateLoggedInState(res);
-      }.bind(this));
-
-      window.FB.Event.subscribe('auth.statusChange', (res) => {
-        this.updateLoggedInState(res);
-      })
-    }.bind(this);
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1754098981316904&autoLogAppEvents=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    window.FB.getLoginStatus(function(res) {
+      console.log("?");
+      console.log(res);
+      let name = '';
+      axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+        .then((response) => {
+          console.log("!");
+          console.log(response);
+          if (response.data.name) {
+            name = response.data.name;
+          }
+        })
+        .then(() => this.setState({ 
+          status: res.status,
+          uid: res.authResponse.userID, 
+          accessToken: res.authResponse.accessToken, 
+          name: name,
+        }));
+      this.updateLoggedInState(res);
+    }.bind(this));
     axios.get(url)
       .then(res => this.setState({ rosters: res.data.rosters }));
   }
