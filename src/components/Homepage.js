@@ -52,7 +52,7 @@ export default class Homepage extends React.Component {
                 status: res.status,
                 uid: res.authResponse.userID, 
                 accessToken: res.authResponse.accessToken, 
-                name: name,
+                name: response.data.name,
               })
             }
           })
