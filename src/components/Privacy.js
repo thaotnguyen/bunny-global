@@ -3,53 +3,33 @@ import React from 'react';
 export default class Privacy extends React.Component {
   render() {
     return(
-      <div>
-<h2>Bunny Global Terms of Service</h2>
-<h3>1. Terms</h3>
-<p>By accessing the website at <a href="https://bunnyglobal.org">https://bunnyglobal.org</a>, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.</p>
-<h3>2. Use License</h3>
-<ol type="a">
-   <li>Permission is granted to temporarily download one copy of the materials (information or software) on Bunny Global's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
-   <ol type="i">
-       <li>modify or copy the materials;</li>
-       <li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
-       <li>attempt to decompile or reverse engineer any software contained on Bunny Global's website;</li>
-       <li>remove any copyright or other proprietary notations from the materials; or</li>
-       <li>transfer the materials to another person or "mirror" the materials on any other server.</li>
-   </ol>
-    </li>
-   <li>This license shall automatically terminate if you violate any of these restrictions and may be terminated by Bunny Global at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.</li>
-</ol>
-<h3>3. Disclaimer</h3>
-<ol type="a">
-   <li>The materials on Bunny Global's website are provided on an 'as is' basis. Bunny Global makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</li>
-   <li>Further, Bunny Global does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.</li>
-</ol>
-<h3>4. Limitations</h3>
-<p>In no event shall Bunny Global or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Bunny Global's website, even if Bunny Global or a Bunny Global authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.</p>
-<h3>5. Accuracy of materials</h3>
-<p>The materials appearing on Bunny Global's website could include technical, typographical, or photographic errors. Bunny Global does not warrant that any of the materials on its website are accurate, complete or current. Bunny Global may make changes to the materials contained on its website at any time without notice. However Bunny Global does not make any commitment to update the materials.</p>
-<h3>6. Links</h3>
-<p>Bunny Global has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Bunny Global of the site. Use of any such linked website is at the user's own risk.</p>
-<h3>7. Modifications</h3>
-<p>Bunny Global may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
-<h3>8. Governing Law</h3>
-<p>These terms and conditions are governed by and construed in accordance with the laws of New York, NY and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
-Back to top 
-Your generated terms has been copied to the clipboard.
-Share FacebookTwitter
-Humaan logo mark Made by Humaan
-
-Generate a Terms of Service and Privacy Policy statement for:
-Websites
-SaaS / Web apps
-eCommerce
-News / Blogs
-About Getterms.io
-How to write a privacy policy
-Why do I need a privacy policy?
-Share FacebookTwitter
-      </div>
+      <div>Privacy Notice
+      This privacy notice discloses the privacy practices for (website address). This privacy notice applies solely to information collected by this website. It will notify you of the following:
+      
+      What personally identifiable information is collected from you through the website, how it is used and with whom it may be shared.
+      What choices are available to you regarding the use of your data.
+      The security procedures in place to protect the misuse of your information.
+      How you can correct any inaccuracies in the information.
+      Information Collection, Use, and Sharing 
+      We are the sole owners of the information collected on this site. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will not sell or rent this information to anyone.
+      
+      We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g. to ship an order.
+      
+      Unless you ask us not to, we may contact you via email in the future to tell you about specials, new products or services, or changes to this privacy policy.
+      
+      Your Access to and Control Over Information 
+      You may opt out of any future contacts from us at any time. You can do the following at any time by contacting us via the email address or phone number given on our website:
+      
+      See what data we have about you, if any.
+      Change/correct any data we have about you.
+      Have us delete any data we have about you.
+      Express any concern you have about our use of your data.
+      Security 
+      We take precautions to protect your information. When you submit sensitive information via the website, your information is protected both online and offline.
+      
+      Wherever we collect sensitive information (such as credit card data), that information is encrypted and transmitted to us in a secure way. You can verify this by looking for a lock icon in the address bar and looking for "https" at the beginning of the address of the Web page.
+      
+      While we use encryption to protect sensitive information transmitted online, we also protect your information offline. Only employees who need the information to perform a specific job (for example, billing or customer service) are granted access to personally identifiable information. The computers/servers in which we store personally identifiable information are kept in a secure environment.</div>
     )
   }
 }
