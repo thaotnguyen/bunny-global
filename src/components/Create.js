@@ -133,6 +133,9 @@ export default class Create extends React.Component {
   }
 
   componentDidMount() {
+    if (Cookies.get('bg-name')) {
+      this.setState({ name: Cookies.get('bg-name') });
+    }
     window.fbAsyncInit = function() {
       window.FB.init({
         appId            : '1754098981316904',

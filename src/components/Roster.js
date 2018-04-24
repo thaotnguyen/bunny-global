@@ -39,15 +39,13 @@ export default class Roster extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    if (Cookies.get('bg-name')) {
+      this.setState({ name: Cookies.get('bg-name') });
+    }
     window.FB.getLoginStatus(function(res) {
-      console.log("?");
-      console.log(res);
       let name = '';
       axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
         .then((response) => {
-          console.log("!");
-          console.log(response);
           if (response.data.name) {
             name = response.data.name;
           }

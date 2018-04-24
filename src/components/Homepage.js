@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default class Homepage extends React.Component {
 
@@ -18,6 +19,9 @@ export default class Homepage extends React.Component {
   }
 
   componentDidMount() {
+    if (Cookies.get('bg-name')) {
+      this.setState({ name: Cookies.get('bg-name') });
+    }
     window.fbAsyncInit = () => {
       window.FB.init({
         appId            : '1754098981316904',
@@ -34,6 +38,7 @@ export default class Homepage extends React.Component {
         axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
           .then((response) => {
             if (response.data.name) {
+              Cookies.set('bg-name', response.data.name);
               this.setState({ 
                 status: res.status,
                 uid: res.authResponse.userID, 
@@ -55,7 +60,6 @@ export default class Homepage extends React.Component {
   }
     
   render() {
-    console.log(this.state.name);
      return ( 
       <div className='homepage'>
       <div id="fb-root"></div>
