@@ -23,6 +23,7 @@ export default class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+      loggedIn: true,
       status: '', 
       uid: '', 
       accessToken: '', 
@@ -110,26 +111,65 @@ export default class Create extends React.Component {
     });
   }
 
+  statusChangeCallback = (res) => {
+    if (res.status === 'connected') {
+      this.setState({ loggedIn: true });
+    } else {
+      this.setState({ loggedIn: false });
+    }
+  }
+
+  updateLoggedInState = (res) => {
+    if (res.status !== 'connected') {
+      window.location.replace('/');
+    } else {
+      let name = '';
+      axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+        .then((response) => {
+          if (response.data.name) {
+            name = response.data.name;
+          }
+        })
+        .then(() => this.setState({ 
+          status: res.status,
+          uid: res.authResponse.userID, 
+          accessToken: res.authResponse.accessToken, 
+          name: name,
+        }));
+    }
+  }
+
   componentDidMount() {
-    // window.FB.getLoginStatus(res => {
-    //   if (res.status !== 'connected') {
-    //     window.location.replace('/');
-    //   } else {
-    //     let name = '';
-    //     axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-    //       .then((response) => {
-    //         if (response.data.name) {
-    //           name = response.data.name;
-    //         }
-    //       })
-    //       .then(() => this.setState({ 
-    //         status: res.status,
-    //         uid: res.authResponse.userID, 
-    //         accessToken: res.authResponse.accessToken, 
-    //         name: name,
-    //       }));
-    //   }
-    // });
+    window.fbAsyncInit = function() {
+      window.FB.init({
+        appId            : '1754098981316904',
+        status           : true,
+        cookie           : true,
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.12'
+      });
+
+      window.FB.getLoginStatus(function(response) {
+        this.statusChangeCallback(response);
+      }.bind(this));
+
+      window.FB.Event.subscribe('auth.statusChange', (res) => {
+        if (res.authResponse) {
+          this.updateLoggedInState(res);
+        } else {
+          this.updateLoggedOutState();
+        }
+      })
+    }.bind(this);
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1754098981316904&autoLogAppEvents=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
     axios.get(url)
       .then(res => this.setState({ players: res.data.players }));
   }
@@ -174,7 +214,7 @@ export default class Create extends React.Component {
               {...checkboxProps}
               className='-striped -highlight'/>
               <div 
-                className={this.state.money < 0 ? 'button disabled' : 'button'}
+                className={this.state.money < 0 || !this.state.name ? 'button disabled' : 'button'}
                 onClick={this.submit}
               >
                 Submit
