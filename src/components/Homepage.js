@@ -1,31 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default class Homepage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { loggedIn: false };
+    this.state = { status: '', uid: '', accessToken: '', name: '' };
   }
 
   handleVoteClick = () => {
     document.getElementsByClassName('vote-container')[0].scrollIntoView({ behavior: 'smooth' });
-  }
-
-  statusChangeCallback = (res) => {
-    if (res.status === 'connected') {
-      this.setState({ loggedIn: true });
-    } else {
-      this.setState({ loggedIn: false });
-    }
-  }
-
-  updateLoggedInState = () => {
-    this.setState({ loggedIn: true });
-  }
-
-  updateLoggedOutState = () => {
-    this.setState({ loggedIn: false });
   }
 
   componentDidMount() {
@@ -39,14 +24,25 @@ export default class Homepage extends React.Component {
         version          : 'v2.12'
       });
 
-      window.FB.getLoginStatus(function(response) {
+      window.FB.getLoginStatus(function(res) {
         console.log("?");
-        this.updateLoggedInState(response);
-      }.bind(this));
-
-      window.FB.Event.subscribe('auth.statusChange', (res) => {
-        this.updateLoggedInState(res);
-      })
+        console.log(res);
+        let name = '';
+        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+          .then((response) => {
+            console.log("!");
+            console.log(response);
+            if (response.data.name) {
+              name = response.data.name;
+            }
+          })
+          .then(() => this.setState({ 
+            status: res.status,
+            uid: res.authResponse.userID, 
+            accessToken: res.authResponse.accessToken, 
+            name: name,
+          }));
+      });
     }.bind(this);
 
     (function(d, s, id){
@@ -59,6 +55,7 @@ export default class Homepage extends React.Component {
   }
     
   render() {
+    console.log(this.state.name);
      return ( 
       <div className='homepage'>
       <div id="fb-root"></div>
@@ -68,7 +65,7 @@ export default class Homepage extends React.Component {
           </video>
           <div className='title'>BUNNY GLOBAL</div>
           <img src='img/logo2.png' alt=''/>
-          { this.state.loggedIn
+          { this.state.name
             ? <Link to='/roster'><div className='create'>CREATE A ROSTER</div></Link>
             : <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>}
         </div>

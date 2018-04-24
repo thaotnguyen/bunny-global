@@ -38,15 +38,6 @@ export default class Roster extends React.Component {
     });
   }
 
-  updateLoggedInState = (res) => {
-    if (res.status !== 'connected') {
-      window.location.replace('/');
-    } else {
-      console.log("!");
-      
-    }
-  }
-
   componentDidMount() {
     console.log('componentDidMount');
     window.FB.getLoginStatus(function(res) {
@@ -67,7 +58,6 @@ export default class Roster extends React.Component {
           accessToken: res.authResponse.accessToken, 
           name: name,
         }));
-      this.updateLoggedInState(res);
     }.bind(this));
     axios.get(url)
       .then(res => this.setState({ rosters: res.data.rosters }));
