@@ -32,8 +32,9 @@ export default class Homepage extends React.Component {
           .then((response) => {
             console.log("!");
             console.log(response);
+            const self = this;
             if (response.data.name) {
-              this.setState({ 
+              self.setState({ 
                 status: res.status,
                 uid: res.authResponse.userID, 
                 accessToken: res.authResponse.accessToken, 
