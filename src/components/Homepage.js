@@ -40,15 +40,12 @@ export default class Homepage extends React.Component {
       });
 
       window.FB.getLoginStatus(function(response) {
-        this.statusChangeCallback(response);
+        console.log("?");
+        this.updateLoggedInState(response);
       }.bind(this));
 
       window.FB.Event.subscribe('auth.statusChange', (res) => {
-        if (res.authResponse) {
-          this.updateLoggedInState(res);
-        } else {
-          this.updateLoggedOutState();
-        }
+        this.updateLoggedInState(res);
       })
     }.bind(this);
 

@@ -38,18 +38,11 @@ export default class Roster extends React.Component {
     });
   }
 
-  statusChangeCallback = (res) => {
-    if (res.status === 'connected') {
-      this.setState({ loggedIn: true });
-    } else {
-      this.setState({ loggedIn: false });
-    }
-  }
-
   updateLoggedInState = (res) => {
     if (res.status !== 'connected') {
       window.location.replace('/');
     } else {
+      console.log("!");
       let name = '';
       axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
         .then((response) => {
@@ -73,20 +66,17 @@ export default class Roster extends React.Component {
         status           : true,
         cookie           : true,
         autoLogAppEvents : true,
-        xfbml            : true,
+        xfbml            : false,
         version          : 'v2.12'
       });
 
       window.FB.getLoginStatus(function(response) {
-        this.statusChangeCallback(response);
+        console.log("?");
+        this.updateLoggedInState(response);
       }.bind(this));
 
       window.FB.Event.subscribe('auth.statusChange', (res) => {
-        if (res.authResponse) {
-          this.updateLoggedInState(res);
-        } else {
-          this.updateLoggedOutState();
-        }
+        this.updateLoggedInState(res);
       })
     }.bind(this);
 
@@ -99,7 +89,6 @@ export default class Roster extends React.Component {
     }(document, 'script', 'facebook-jssdk'));
     axios.get(url)
       .then(res => this.setState({ rosters: res.data.rosters }));
-    setTimeout(() => this.forceUpdate(), 1500);
   }
 
   render() {
