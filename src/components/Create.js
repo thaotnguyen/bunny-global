@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import $ from 'jquery';
 
-const url = 'https://api.myjson.com/bins/svqgz';
+const url = 'https://api.myjson.com/bins/nkz6r';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
@@ -51,6 +51,10 @@ export default class Create extends React.Component {
     {
       Header: 'Tag',
       accessor: 'tag',
+      Cell: row => row.original.twitter
+        ? <div><a href={`https://www.twitter.com/${row.original.twitter}`}><div className='table-tag'>{row.value}</div></a><div className='table-name'>{row.original.name}</div></div>
+        : <div><div className='table-tag'>{row.value}</div><div className='table-name'>{row.original.name}</div></div>
+
     },
     {
       Header: 'Value',
@@ -107,25 +111,25 @@ export default class Create extends React.Component {
   }
 
   componentDidMount() {
-    window.FB.getLoginStatus(res => {
-      if (res.status !== 'connected') {
-        window.location.replace('/');
-      } else {
-        let name = '';
-        axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-          .then((response) => {
-            if (response.data.name) {
-              name = response.data.name;
-            }
-          })
-          .then(() => this.setState({ 
-            status: res.status,
-            uid: res.authResponse.userID, 
-            accessToken: res.authResponse.accessToken, 
-            name: name,
-          }));
-      }
-    });
+    // window.FB.getLoginStatus(res => {
+    //   if (res.status !== 'connected') {
+    //     window.location.replace('/');
+    //   } else {
+    //     let name = '';
+    //     axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
+    //       .then((response) => {
+    //         if (response.data.name) {
+    //           name = response.data.name;
+    //         }
+    //       })
+    //       .then(() => this.setState({ 
+    //         status: res.status,
+    //         uid: res.authResponse.userID, 
+    //         accessToken: res.authResponse.accessToken, 
+    //         name: name,
+    //       }));
+    //   }
+    // });
     axios.get(url)
       .then(res => this.setState({ players: res.data.players }));
   }

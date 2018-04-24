@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import "react-table/react-table.css";
 
-const url = 'https://api.myjson.com/bins/svqgz';
+const url = 'https://api.myjson.com/bins/nkz6r';
 
 const columns = [
   {
