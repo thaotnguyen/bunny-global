@@ -28,7 +28,7 @@ export default class Homepage extends React.Component {
         version          : 'v2.12'
       });
 
-      window.FB.Event.subscribe('auth.statusChange', this.auth_callback);
+      window.FB.Event.subscribe('auth.login', this.auth_callback);
 
       window.FB.getLoginStatus((res) => {
         console.log("?");
