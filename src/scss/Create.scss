@@ -1,4 +1,4 @@
-.roster {
+.create-page {
   min-height: 100vh;
   min-width: 100vw;
   .container h1 {
@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('/img/1.png');
+    background: url('/img/2.png');
     background-size: cover;
     margin-bottom: 50px;
     position: relative;
@@ -55,7 +55,19 @@
     p {
       max-width: 800px;
       line-height: 1.4em;
-      margin: 0 auto;
+      margin: 0 auto 20px auto;
+    }
+    h1 {
+      font-size: 48px;
+      &.invalid {
+        color: red;
+      }
+    }
+    .money-left {
+      margin-top: -30px;
+      margin-bottom: 30px;
+      color: #bbb;
+      font-weight: bold;
     }
     .button {
       display: inline-block;
@@ -64,10 +76,20 @@
       transition: background-color 0.3s;
       margin: 40px;
       color: white;
+      cursor: pointer;
+      pointer-events: auto;
       border-radius: 3px;
       &:hover {
         background-color: #55b7e8;
         transition: background-color 0.3s;
+      }
+      &.disabled {
+        pointer-events: none;
+        background-color: #ccc;
+        cursor: auto;
+        &:hover {
+          background-color: #ccc;
+        }
       }
     }
   }

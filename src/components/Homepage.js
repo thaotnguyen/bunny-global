@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default class Homepage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { loggedIn: false };
+    this.state = { loggedIn: true };
   }
 
   handleVoteClick = () => {
@@ -71,7 +70,7 @@ export default class Homepage extends React.Component {
             <source src={`video/${Math.floor(Math.random() * 9)}.mp4`} type='video/mp4'/>
           </video>
           <div className='title'>BUNNY GLOBAL</div>
-          <img src='img/logo2.png' />
+          <img src='img/logo2.png' alt=''/>
           { this.state.loggedIn
             ? <Link to='/roster'><div className='create'>CREATE A ROSTER</div></Link>
             : <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>}

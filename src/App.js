@@ -4,10 +4,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Homepage from './components/Homepage';
 import Roster from './components/Roster';
+import Create from './components/Create';
 import './App.css';
 import './index.css';
-
-// https://api.myjson.com/bins/nr83z
 
 const App = withRouter(({ location }) => (
   <div className="App">
@@ -20,6 +19,7 @@ const App = withRouter(({ location }) => (
         <Switch location={location}>
           <Route exact path='/' component={Homepage} />
           <Route exact path='/roster' component={Roster} />
+          <Route exact path='/create' component={Create} />
         </Switch>
       </CSSTransition>
     </TransitionGroup>

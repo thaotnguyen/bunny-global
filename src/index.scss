@@ -1,15 +1,17 @@
 @import './scss/Homepage';
 @import './scss/Roster';
+@import './scss/Create';
 
-@import url('https://fonts.googleapis.com/css?family=Karla|Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800|Josefin+Sans|Lato');
 
 html {
   overflow-x: hidden;
 }
 
 body {
- font-family: 'Karla', sans-serif;
+ font-family: 'Lato', sans-serif;
  text-align: left;
+ background: black;
  height: 100%;
  width: 100%;
  margin: 0;
@@ -19,6 +21,21 @@ body {
 .homepage {
   transition: opacity 0.3s;
   z-index: 100;
+}
+
+.ReactTable {
+  max-width: 800px;
+  margin: 0 auto;
+  .rt-thead .rt-th {
+    padding: 10px 12px;
+  }
+  .rt-tbody .rt-td {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
 
 .fade-enter {

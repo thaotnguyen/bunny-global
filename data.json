@@ -1,0 +1,24 @@
+{
+  "players": [
+    {
+      "name": "Paul Merritt",
+      "tag": "Paul D",
+      "twitter": "",
+      "value": 0
+    }
+  ],
+  "rosters": [
+    {
+      "owner": "",
+      "name": "",
+      "lineup": [
+        {
+          "name": "Paul Merritt",
+          "tag": "Paul D",
+          "twitter": "",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}
