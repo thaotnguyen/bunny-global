@@ -30,7 +30,7 @@ export default class Create extends React.Component {
       name: '', 
       players: [], 
       selected: [], 
-      money: 8,
+      money: 7,
     };
     $(window).scroll(function() {
       var scrolledY = $(window).scrollTop();
@@ -172,6 +172,7 @@ export default class Create extends React.Component {
     }(document, 'script', 'facebook-jssdk'));
     axios.get(url)
       .then(res => this.setState({ players: res.data.players }));
+    setTimeout(() => this.forceUpdate(), 1500);
   }
 
   render() {    
@@ -200,7 +201,7 @@ export default class Create extends React.Component {
           </div>
           <Fade right duration={500} distance='50px'>
             <p>You’re the manager! Build the strongest roster from the entire field of Paul D's Funeral tournament entrants with a fixed salary cap. Players score points based on the performance of their roster in the actual tournament.</p>
-            <p>You have $8.00 in total to buy a roster and you can pick at most 8 people.</p>
+            <p>You have $7.00 to buy a roster and you must pick 8 people and use all of your money exactly.</p>
             <h1 className={this.state.money < 0 ? 'invalid' : ''}>{toFixed(this.state.money, 2)}</h1>
             <div className='money-left'>MONEY LEFT</div>
             <ReactTable 
@@ -214,7 +215,7 @@ export default class Create extends React.Component {
               {...checkboxProps}
               className='-striped -highlight'/>
               <div 
-                className={this.state.money < 0 || !this.state.name ? 'button disabled' : 'button'}
+                className={this.state.money !== 0 || this.state.selected.length !== 8 || !this.state.name ? 'button disabled' : 'button'}
                 onClick={this.submit}
               >
                 Submit

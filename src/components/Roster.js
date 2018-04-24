@@ -99,6 +99,7 @@ export default class Roster extends React.Component {
     }(document, 'script', 'facebook-jssdk'));
     axios.get(url)
       .then(res => this.setState({ rosters: res.data.rosters }));
+    setTimeout(() => this.forceUpdate(), 1500);
   }
 
   render() {
