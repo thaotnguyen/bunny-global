@@ -13,6 +13,10 @@ export default class Homepage extends React.Component {
     document.getElementsByClassName('vote-container')[0].scrollIntoView({ behavior: 'smooth' });
   }
 
+  auth_callback = (res) => {
+    window.location.reload(true);
+  }
+
   componentDidMount() {
     const this1 = this;
     window.fbAsyncInit = function() {
@@ -24,6 +28,9 @@ export default class Homepage extends React.Component {
         xfbml            : true,
         version          : 'v2.12'
       });
+
+      window.FB.Event.subscribe('auth.authResponseChange', this.auth_callback);
+      window.FB.Event.subscribe('auth.statusChange', this.auth_callback);
 
       const this2 = this1;
       window.FB.getLoginStatus(function(res) {
