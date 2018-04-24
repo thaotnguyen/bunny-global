@@ -4,6 +4,7 @@ import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 import "react-table/react-table.css";
 
@@ -41,22 +42,9 @@ export default class Roster extends React.Component {
   componentDidMount() {
     if (Cookies.get('bg-name')) {
       this.setState({ name: Cookies.get('bg-name') });
+    } else {
+      window.location.replace('/');
     }
-    window.FB.getLoginStatus(function(res) {
-      let name = '';
-      axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
-        .then((response) => {
-          if (response.data.name) {
-            name = response.data.name;
-          }
-        })
-        .then(() => this.setState({ 
-          status: res.status,
-          uid: res.authResponse.userID, 
-          accessToken: res.authResponse.accessToken, 
-          name: name,
-        }));
-    }.bind(this));
     axios.get(url)
       .then(res => this.setState({ rosters: res.data.rosters }));
   }

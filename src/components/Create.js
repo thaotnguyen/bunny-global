@@ -4,6 +4,7 @@ import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 const url = 'https://api.myjson.com/bins/16kho3';
 
@@ -135,33 +136,9 @@ export default class Create extends React.Component {
   componentDidMount() {
     if (Cookies.get('bg-name')) {
       this.setState({ name: Cookies.get('bg-name') });
+    } else {
+      window.location.replace('/');
     }
-    window.fbAsyncInit = function() {
-      window.FB.init({
-        appId            : '1754098981316904',
-        status           : true,
-        cookie           : true,
-        autoLogAppEvents : true,
-        xfbml            : true,
-        version          : 'v2.12'
-      });
-
-      window.FB.getLoginStatus(function(response) {
-        this.updateLoggedInState(response);
-      }.bind(this));
-
-      window.FB.Event.subscribe('auth.statusChange', (res) => {
-        this.updateLoggedInState(res);
-      })
-    }.bind(this);
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1754098981316904&autoLogAppEvents=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
     axios.get(url)
       .then(res => this.setState({ players: res.data.players }));
   }
