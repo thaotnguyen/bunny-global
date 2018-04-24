@@ -33,15 +33,14 @@ export default class Homepage extends React.Component {
             console.log("!");
             console.log(response);
             if (response.data.name) {
-              name = response.data.name;
+              this.setState({ 
+                status: res.status,
+                uid: res.authResponse.userID, 
+                accessToken: res.authResponse.accessToken, 
+                name: name,
+              })
             }
           })
-          .then(() => this.setState({ 
-            status: res.status,
-            uid: res.authResponse.userID, 
-            accessToken: res.authResponse.accessToken, 
-            name: name,
-          }));
       });
     }.bind(this);
 
