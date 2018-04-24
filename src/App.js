@@ -5,6 +5,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Homepage from './components/Homepage';
 import Roster from './components/Roster';
 import Create from './components/Create';
+import Privacy from './components/Privacy';
 import './App.css';
 import './index.css';
 
@@ -20,6 +21,7 @@ const App = withRouter(({ location }) => (
           <Route exact path='/' component={Homepage} />
           <Route exact path='/roster' component={Roster} />
           <Route exact path='/create' component={Create} />
+          <Route exact path='/privacy' component={Privacy} />
         </Switch>
       </CSSTransition>
     </TransitionGroup>
