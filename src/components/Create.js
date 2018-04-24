@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import $ from 'jquery';
 
-const url = 'https://api.myjson.com/bins/nkz6r';
+const url = 'https://api.myjson.com/bins/8jzvn';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
