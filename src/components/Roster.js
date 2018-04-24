@@ -48,7 +48,9 @@ export default class Roster extends React.Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
     window.fbAsyncInit = function() {
+      console.log('fbAsyncInit running');
       window.FB.init({
         appId            : '1754098981316904',
         status           : true,
