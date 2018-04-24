@@ -193,7 +193,7 @@ export default class Create extends React.Component {
             <h1 className={this.state.money < 0 ? 'invalid' : ''}>{toFixed(this.state.money, 2)}</h1>
             <div className='money-left'>MONEY LEFT</div>
             <ReactTable 
-              data={this.state.players.sort((a,b) => !(a.value - b.value))} 
+              data={this.state.players}
               columns={this.columns()} 
               showPagination={false}
               showPageSizeOptions={false}

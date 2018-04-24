@@ -18,8 +18,6 @@ export default class Homepage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
-    const this1 = this;
     window.fbAsyncInit = () => {
       window.FB.init({
         appId            : '1754098981316904',
@@ -32,22 +30,10 @@ export default class Homepage extends React.Component {
 
       window.FB.Event.subscribe('auth.login', this.auth_callback);
 
-      console.log(this1.state);
-      const this2 = this;
       window.FB.getLoginStatus((res) => {
-        console.log("?");
-        console.log(res);
-        let name = '';
-        console.log(this2);
-        const this3 = this;
         axios.get(`https://graph.facebook.com/${res.authResponse.userID}?access_token=${res.authResponse.accessToken}`)
           .then((response) => {
-            console.log("!");
-            console.log(response);
             if (response.data.name) {
-              console.log('inside name set block');
-              console.log(this3);
-              console.log(this);
               this.setState({ 
                 status: res.status,
                 uid: res.authResponse.userID, 
