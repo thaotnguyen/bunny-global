@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
-const url = 'https://api.myjson.com/bins/16kho3';
+const url = 'https://api.myjson.com/bins/11na47';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
