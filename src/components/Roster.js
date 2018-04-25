@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 import "react-table/react-table.css";
 
-const url = 'https://api.myjson.com/bins/11na47';
+const url = 'https://api.myjson.com/bins/1elgiv';
 
 const columns = [
   {
@@ -19,7 +19,7 @@ const columns = [
   {
     Header: 'Team',
     accessor: 'team',
-    Cell: row => row.value.map(entry => <div>{entry.tag}</div>),
+    Cell: row => row.value.sort((a,b) => b.tag - a.tag).map(entry => <div>{entry.tag}</div>),
   },
   {
     Header: 'Score',

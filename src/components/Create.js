@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
-const url = 'https://api.myjson.com/bins/11na47';
+const url = 'https://api.myjson.com/bins/1elgiv';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
@@ -71,7 +71,6 @@ export default class Create extends React.Component {
   ];
 
   toggleSelect = (name, value) => {
-    console.log(this.state.money, value);
     if (this.state.selected.includes(name)) {
       this.setState(state => {
         return { 
