@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 import "react-table/react-table.css";
 
-const url = 'https://api.myjson.com/bins/1elgiv';
+const url = 'https://api.myjson.com/bins/zva3r';
 
 const columns = [
   {
