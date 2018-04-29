@@ -8,9 +8,18 @@ import Cookies from 'js-cookie';
 
 import "react-table/react-table.css";
 
-const url = 'https://api.myjson.com/bins/zva3r';
+const url = 'https://api.myjson.com/bins/1cni07';
 
-const columns = [
+const calcScore = (team, data) => {
+  const playerNames = team.map(a => a.tag);
+  console.log(data.filter(a => playerNames.indexOf(a.tag) !== -1));
+  return data
+    .filter(a => playerNames.indexOf(a.tag) !== -1)
+    .map(a => a.points)
+    .reduce((a, b) => a + b);
+}
+
+const columns = (data) => [
   {
     Header: 'Owner',
     accessor: 'name',
@@ -24,7 +33,6 @@ const columns = [
   {
     Header: 'Score',
     accessor: 'score',
-    Cell: row => '-',
   }
 ];
 
@@ -32,7 +40,7 @@ export default class Roster extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { loggedIn: true, status: '', uid: '', accessToken: '', name: '', rosters: [] };
+    this.state = { loggedIn: true, status: '', uid: '', accessToken: '', name: '', rosters: [], players: [] };
     $(window).scroll(function() {
       var scrolledY = $(window).scrollTop();
       $('.header-container').css('background-position', 'left ' + ((scrolledY)) + 'px');
@@ -46,7 +54,13 @@ export default class Roster extends React.Component {
       window.location.replace('/');
     }
     axios.get(url)
-      .then(res => this.setState({ rosters: res.data.rosters }));
+      .then(res => this.setState({
+         rosters: res.data.rosters.map((roster) => {
+           const score = calcScore(roster.team, res.data.players);
+           return {score, ...roster}; 
+         }), 
+         players: res.data.players,
+      }));
   }
 
   render() {
@@ -60,12 +74,9 @@ export default class Roster extends React.Component {
           </div>
           <Fade right duration={500} distance='50px'>
             <p>Last year our big event was the Civil War between NickC and Owsla. No one knows which side actually won or what the score was between the two. This year we're ending things off with our head TO's passing... his classes at NYU and graduating. That's right! Paul D is leaving us and we are all gathering to mourn this loss. But we're also celebrating because he doesn't seem so fond of life anyway. Formal attire is strongly suggested.</p>
-            {this.state.rosters.map(roster => roster.name).includes(this.state.name) 
-              ? '' 
-              : <Link to='/create'><div className='button'>Create a roster</div></Link>}
             <ReactTable 
-              data={this.state.rosters} 
-              columns={columns} 
+              data={this.state.rosters.sort((a,b) => b.score - a.score)} 
+              columns={columns(this.state.players)} 
               showPagination={false}
               showPageSizeOptions={false}
               resizable={false}

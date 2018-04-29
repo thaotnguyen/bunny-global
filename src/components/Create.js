@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
-const url = 'https://api.myjson.com/bins/zva3r';
+const url = 'https://api.myjson.com/bins/1cni07';
 
 const toFixed = (num, fixed) => {
   fixed = fixed || 0;
@@ -66,7 +66,6 @@ export default class Create extends React.Component {
     {
       Header: 'Score',
       accessor: 'score',
-      Cell: row => '-',
     }
   ];
 
@@ -181,12 +180,6 @@ export default class Create extends React.Component {
               pageSize={this.state.players.length}
               {...checkboxProps}
               className='-striped -highlight'/>
-              <div 
-                className={this.state.money !== 0 || this.state.selected.length !== 8 || !this.state.name ? 'button disabled' : 'button'}
-                onClick={this.submit}
-              >
-                Submit
-              </div>
           </Fade>
         </div>
       </div>
